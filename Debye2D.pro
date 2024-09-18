@@ -43,10 +43,22 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-LIBS += \
-    -lgsl \# To include libgsl.so from /usr/local/lib
-    -lgslcblas \# To include libgslcblas.so from /usr/local/lib
-    -lm
+linux {
+    message("Running on Windows")
+    LIBS += \
+        -lgsl \# To include libgsl.so from /usr/local/lib
+        -lgslcblas \# To include libgslcblas.so from /usr/local/lib
+        -lm
+}
+
+windows: {
+    message("Running on Windows")
+    LIBS += \
+        "C:/Program Files/GSL-WIN64/gsl-2.7.1/bin/libgsl-27.dll" \
+        "C:/Program Files/GSL-WIN64/gsl-2.7.1/bin/libgslcblas-0.dll"
+
+    INCLUDEPATH += "C:/Program Files/GSL-WIN64/gsl-2.7.1/include"
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

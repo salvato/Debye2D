@@ -39,21 +39,10 @@ make_function (double (*f) (double, void*), double* p) {
 }
 
 
-void
-my_error_handler (const char *reason, const char *file, int line, int err) {
-    if(true)
-        qDebug() << "(caught ["
-                 << file << ":"
-                 << line << ":"
-                 << reason << "(" << err  << ")]";
-    //%s:%d: %s (%d)])\n", file, line, reason, err) ;
-}
-
 Debye2DFunction::Debye2DFunction()
     : pPlot(nullptr)
 {
     gsl_ieee_env_setup ();
-    gsl_set_error_handler (&my_error_handler);
     getSettings();
     f1 = make_function(&integranda, nullptr);
 
