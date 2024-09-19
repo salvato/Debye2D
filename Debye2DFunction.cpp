@@ -151,11 +151,10 @@ Debye2DFunction::saveData(QFile* pOutFile) {
     size_t neval  = 0;
     double epsabs = 1.0e-12, epsrel = 1.0e-6;
 
-    // QVector2D* pData = pPlot->GetDataSet(1); <<== Da Implementare !!! Manca !!!
-
     pOutFile->write(QString("%1 %2 %3\n")
                         .arg("Temperature", 12)
                         .arg("Debye2D", 12)
+                        .arg("Abs Error", 12)
                         .toLocal8Bit());
     double f;
     double factor = (4.0*ni*R)/(Pm*(TetaD*TetaD));
@@ -167,7 +166,6 @@ Debye2DFunction::saveData(QFile* pOutFile) {
         abserr *= factor;
         pOutFile->write(QString("%1 %2 %3\n")
                             .arg(T,      12, 'g', 6, ' ')
-                            .arg(f,      12, 'g', 6, ' ')
                             .arg(f,      12, 'g', 6, ' ')
                             .arg(abserr, 12, 'g', 6, ' ')
                             .toLocal8Bit());

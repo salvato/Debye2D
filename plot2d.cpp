@@ -241,6 +241,19 @@ Plot2D::NewDataSet(int Id, int PenWidth, QColor Color, int Symbol, QString Title
     return pDataItem;
 }
 
+DataStream2D*
+Plot2D::GetDataSet(int Id) {
+    DataStream2D* pData = nullptr;
+    for(int i=0; i<dataSetList.count(); i++) {
+        DataStream2D* pDataItem = dataSetList.at(i);
+        if(pDataItem->GetId() == Id) {
+            pData = pDataItem;
+            break;
+        }
+    }
+    return pData;
+}
+
 
 bool
 Plot2D::ClearDataSet(int Id) {

@@ -152,8 +152,8 @@ ParametersWindow::onSaveData() {
 
     outFile.write(QString("Fit Parameters:\n").toLocal8Bit());
     for(qsizetype i=0; i<parLine.size(); i++) {
-        outFile.write(QString("%1, %2, %3, %4, %5, ")
-                      .arg(QString(parLine.at(i)->getName()), 12)
+        outFile.write(QString("%1=%2\n")
+                      .arg(QString(parLine.at(i)->getName()), 5)
                       .arg(parLine.at(i)->getValue(), 12)
                       .toLocal8Bit());
     }
