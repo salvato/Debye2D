@@ -71,6 +71,7 @@ ParameterLine::ParameterLine() {
     SetLayout();
 }
 
+
 void
 ParameterLine::SetLayout() {
     auto* mainLayout = new QHBoxLayout();
@@ -113,13 +114,21 @@ ParameterLine::onValueChanged(QString sNewValue) {
     sNewValue.toDouble(&ok);
     if(ok) {
         editValue.setStyleSheet(sNormalStyle);
+        emit valueChanged(number);
     }
     else {
         editValue.setStyleSheet(sErrorStyle);
     }
-    emit valueChanged(number);
 }
 
+
+void
+ParameterLine::setError(bool bError) {
+    if(bError)
+        editValue.setStyleSheet(sErrorStyle);
+    else
+        editValue.setStyleSheet(sNormalStyle);
+}
 
 
 void

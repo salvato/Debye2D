@@ -16,7 +16,6 @@ SOURCES += \
     axesdialog.cpp \
     datastream2d.cpp \
     function.cpp \
-    krab.cpp \
     main.cpp \
     mainwindow.cpp \
     parameterline.cpp \
@@ -33,7 +32,6 @@ HEADERS += \
     config.h \
     datastream2d.h \
     function.h \
-    krab.h \
     mainwindow.h \
     parameterline.h \
     parameterswindow.h \
@@ -66,5 +64,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ../MinFits/plot.png \
     plot.png

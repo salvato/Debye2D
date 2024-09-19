@@ -170,7 +170,23 @@ ParametersWindow::onClose() {
 
 void
 ParametersWindow::onValueChanged(int paramNum) {
-    upar.replace(paramNum, parLine.at(paramNum)->getValue());
-    pFunction->Plot(upar);
+    bool bOk = true;
+    if(paramNum == 6) {
+        if((parLine.at(paramNum)->getValue()<0.1)) {
+            bOk = false;
+            parLine.at(paramNum)->setError(true);
+        }
+    }
+    if(paramNum == 3) {
+        if((parLine.at(paramNum)->getValue()<40.0) || (parLine.at(paramNum)->getValue()>1000.0)) {
+            bOk = false;
+            parLine.at(paramNum)->setError(true);
+        }
+    }
+    if(bOk) {
+        parLine.at(paramNum)->setError(false);
+        upar.replace(paramNum, parLine.at(paramNum)->getValue());
+        pFunction->Plot(upar);
+    }
 }
 

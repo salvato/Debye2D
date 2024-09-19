@@ -39,10 +39,23 @@ make_function (double (*f) (double, void*), double* p) {
 }
 
 
+void
+my_error_handler (const char *reason, const char *file,
+                  int line, int err);
+
+
+void
+my_error_handler (const char *reason, const char *file, int line, int err)
+{
+    if (0) printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+}
+
+
 Debye2DFunction::Debye2DFunction()
     : pPlot(nullptr)
 {
     gsl_ieee_env_setup ();
+    gsl_set_error_handler (&my_error_handler);
     getSettings();
     f1 = make_function(&integranda, nullptr);
 
@@ -75,7 +88,7 @@ Debye2DFunction::operator()(const QVector<double>& par, double _T) const {
     Q_UNUSED(par);
     double result = 0, abserr = 0;
     size_t neval  = 0;
-    double epsabs = 1.0e-12, epsrel = 1.0e-6;
+    double epsabs = 1.0e-12, epsrel = 1.0e-3;
 
     ni     = par[0];
     R      = par[1];

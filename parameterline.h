@@ -41,6 +41,7 @@ public:
     explicit ParameterLine();
 
 public:
+    void setError(bool bError);
     void setValue(double newValue);
     QString getName();
     double getValue();
