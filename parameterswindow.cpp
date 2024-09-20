@@ -79,7 +79,11 @@ ParametersWindow::getSettings() {
     nParams = 0;
     QString sName;
     double val;
+#ifdef Q_OS_WINDOWS
+    sName = QString("ni");
+#else
     sName = QString("ν");
+#endif
     val = settings.value(sName, 1.0).toDouble();
     Add(sName, val);
     sName = QString("R");
@@ -88,7 +92,11 @@ ParametersWindow::getSettings() {
     sName = QString("Pm");
     val = settings.value(sName, 3.0).toDouble();
     Add(sName, val);
+#ifdef Q_OS_WINDOWS
+    sName = QString("TetaD");
+#else
     sName = QString("Θd");
+#endif
     val = settings.value(sName, 4.0).toDouble();
     Add(sName, val);
     sName = QString("Tstart");
@@ -150,10 +158,10 @@ ParametersWindow::onSaveData() {
         return;
     }
 
-    outFile.write(QString("Fit Parameters:\n").toLocal8Bit());
+    outFile.write(QString("Parameters:\n").toLocal8Bit());
     for(qsizetype i=0; i<parLine.size(); i++) {
-        outFile.write(QString("%1=%2\n")
-                      .arg(QString(parLine.at(i)->getName()), 5)
+        outFile.write(QString("%1 = %2\n")
+                      .arg(QString(parLine.at(i)->getName()), 7)
                       .arg(parLine.at(i)->getValue(), 12)
                       .toLocal8Bit());
     }
