@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Debye2D.png</file>
+    </qresource>
+</RCC>

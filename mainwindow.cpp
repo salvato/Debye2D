@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Debye2DFunction.h"
 
 #include <QDir>
+#include <QPicture>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     pUi->setupUi(this);
     getSettings();
     setWindowIcon(QIcon(":/plot.png"));
+    pUi->statusbar->showMessage(QString ("© Gabriele Salvato - 2024"));
 }
 
 
@@ -47,6 +49,8 @@ MainWindow::closeEvent(QCloseEvent *event) {
     pUi = nullptr;
     if(pParams) delete pParams;
     pParams = nullptr;
+    if(pFunction) delete pFunction;
+    pFunction = nullptr;
 }
 
 
@@ -68,6 +72,10 @@ void
 MainWindow::on_pushButton_clicked() {
     if(pFunction) delete pFunction;
     pFunction = new Debye2DFunction();
+    QImage formula(":/Debye2D.png");
+    QPixmap pixmap;
+    pixmap.convertFromImage(formula);
+    pUi->formula->setPixmap(pixmap);
 
     if(pParams) delete pParams;
     pParams = new ParametersWindow(pFunction, "Debye 2D Parameters");
@@ -76,7 +84,7 @@ MainWindow::on_pushButton_clicked() {
             this, SLOT(onProgramDone()));
 
     pParams->show();
-    hide();
+    //hide();
 }
 
 

@@ -65,3 +65,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     plot.png
+
+RESOURCES += \
+    Debye2D.qrc
